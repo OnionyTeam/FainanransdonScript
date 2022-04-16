@@ -16,6 +16,7 @@ func showHelp() {
 	fmt.Printf(`Optiones:
 	-h, --help, --auxilium, -a, -?: Praestare hoc auxilium nuntium.
 	-v, --verbose, --verbosus: Plures informationes de executione monstrare.
+	-d, --decompile: Decompile initus lima.
 
 `)
 }
@@ -43,6 +44,30 @@ func main() {
 		}
 		if flagOn("-v", "--verbosus", "--verbose") {
 			verbose = true
+		}
+		if flagOn("-d", "--decompile") {
+			inputFilePath := args[len(args)-2]
+			outputFilePath := args[len(args)-1]
+			inputFile, err := os.Open(inputFilePath)
+			if err != nil {
+				fmt.Printf("Error dum foramen file: %s\n", inputFilePath)
+			}
+			bufferReader := bufio.NewReader(inputFile)
+			content := []byte{}
+			for {
+				byteContent, err := bufferReader.ReadByte()
+				if err != nil {
+					break
+				}
+				content = append(content, byteContent)
+			}
+			inputFile.Close()
+			result := FinanransdonScriptLib.DecompileFromData(content, verbose)
+			err = ioutil.WriteFile(outputFilePath, []byte(result), 0644)
+			if err != nil {
+				fmt.Printf("Error dum foramen file: %s\n", outputFilePath)
+			}
+			return
 		}
 		inputFilePath := args[len(args)-2]
 		outputFilePath := args[len(args)-1]

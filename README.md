@@ -33,3 +33,19 @@ in output file
 61 62 63 AB AC 00 00 00 AB AC 00 00 00 AB AC 00 00 00 AB AC 00 00 00 AB AC 00 00 00
 ```
 binario contento output erit.
+
+## Circa API
+
+```go
+func RunScript(script string, verbose bool = false) []byte
+```
+Hoc munus decurrit FinanransdonScript.  
+`script`: Contentum script.  
+`verbose`(Libitum): Determinare si verbosa notitia output debet. `false` valorem default est.
+
+```go
+func DecompileFromData(data []byte, verbose bool = false) string
+```
+Notitium ex scripta generate.  
+`data`: Contentum notitia.  
+`verbose`(Libitum): Determinare si verbosa notitia output debet. `false` valorem default est.

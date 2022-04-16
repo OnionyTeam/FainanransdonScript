@@ -30,3 +30,48 @@ func RunScript(script string, verbose ...bool) []byte {
 	}
 	return result
 }
+
+func DecompileFromData(data []byte, verbose ...bool) string {
+	isVerbose := false
+	if len(verbose) > 1 {
+		panic("Error: Only allow at most 2 arguments for FinanransdonScriptLib.RunScript()")
+	}
+	if len(verbose) == 1 {
+		isVerbose = verbose[0]
+	}
+	if isVerbose {
+		fmt.Printf("Satus decompiling notitia %#v....\n", data)
+	}
+	result := ""
+	isZeroMode := false
+	zeroCount := 0
+	for index, b := range data {
+		if !isZeroMode {
+			if b != 0 {
+				result += fmt.Sprintf("%2X ", b)
+			} else {
+				// Zero opitimiziation
+				isZeroMode = true
+				zeroCount = 1
+			}
+			if index%13 == 12 {
+				result += "\n"
+			}
+		} else {
+			if b == 0 {
+				zeroCount++
+			} else {
+				// Exit zero opitimiziation
+				if zeroCount <= 3 {
+					for i := 0; i < zeroCount; i++ {
+						result += "00 "
+					}
+				} else {
+					result += fmt.Sprintf("*%d(00)", zeroCount)
+				}
+				result += fmt.Sprintf("%2X ", b)
+			}
+		}
+	}
+	return result
+}
