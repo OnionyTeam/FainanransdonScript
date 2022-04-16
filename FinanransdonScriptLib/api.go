@@ -48,7 +48,7 @@ func DecompileFromData(data []byte, verbose ...bool) string {
 	for index, b := range data {
 		if !isZeroMode {
 			if b != 0 {
-				result += fmt.Sprintf("%2X ", b)
+				result += fmt.Sprintf("%02X ", b)
 			} else {
 				// Zero opitimiziation
 				isZeroMode = true
@@ -69,7 +69,7 @@ func DecompileFromData(data []byte, verbose ...bool) string {
 				} else {
 					result += fmt.Sprintf("*%d(00)", zeroCount)
 				}
-				result += fmt.Sprintf("%2X ", b)
+				result += fmt.Sprintf("%02X ", b)
 				isZeroMode = false
 			}
 		}
