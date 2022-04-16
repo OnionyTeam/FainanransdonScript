@@ -70,6 +70,7 @@ func DecompileFromData(data []byte, verbose ...bool) string {
 					result += fmt.Sprintf("*%d(00)", zeroCount)
 				}
 				result += fmt.Sprintf("%2X ", b)
+				isZeroMode = false
 			}
 		}
 	}
