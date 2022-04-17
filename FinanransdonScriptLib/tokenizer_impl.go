@@ -59,7 +59,7 @@ func TokenizeCode(code string) ([]Token, bool) {
 			case 3:
 				// Number digits 0-9
 				clipBuffer += string(currentChar)
-				if len(result) == 0 || result[len(result)-1].tokenType == TokenTypeOpRepeat {
+				if len(result) != 0 && result[len(result)-1].tokenType == TokenTypeOpRepeat {
 					// Ordinary decimal number
 					stateCode = 2
 				} else {
