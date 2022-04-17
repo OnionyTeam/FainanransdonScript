@@ -1,6 +1,9 @@
 package FinanransdonScriptLib
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
 
 func RunScript(script string, verbose ...bool) []byte {
 	isVerbose := false
@@ -49,6 +52,9 @@ func DecompileFromData(data []byte, verbose ...bool) string {
 		if !isZeroMode {
 			if b != 0 {
 				result += fmt.Sprintf("%02X ", b)
+				if unicode.IsGraphic(rune(b)) {
+					result += fmt.Sprintf("{%c} ", b)
+				}
 			} else {
 				// Zero opitimiziation
 				isZeroMode = true
