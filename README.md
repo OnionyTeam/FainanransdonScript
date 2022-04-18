@@ -1,4 +1,5 @@
 # FainanransdonScript
+![](https://img.shields.io/github/license/OnionyTeam/FainanransdonScript)  
 FainanransdonScript, "File Binarius Generans de 27Onion" est. Is est file binarius generans script. Hoc app files binarii generat per scripta humana-readable.
 
 ## Aedificare FainanransdonScript interpres
